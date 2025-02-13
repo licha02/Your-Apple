@@ -1,0 +1,7 @@
+.text-content {
+    max-width: 750px; /* Define un ancho fijo para el texto */
+    text-align: justify; /* Justifica el texto para que ocupe el mismo espacio en cada línea */
+    margin-left: auto;
+    margin-right: auto;
+}
+
