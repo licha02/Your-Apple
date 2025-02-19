@@ -81,7 +81,7 @@
                     <!-- Columna del texto con ancho fijo -->
                     <div class="col-lg-8">
                         <div class="text-content">
-                            <p class="lead mb-4">
+                            <p class="mb-4">
                                 En Your Apple, nos dedicamos a ofrecer soluciones rápidas y confiables para tus
                                 dispositivos
                                 electrónicos. Desde 2020, hemos sido líderes en el rubro de reparaciones, brindando un
@@ -137,6 +137,45 @@
             </p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navbar = document.querySelector(".navbar");
+            const navLinks = document.querySelectorAll(".nav-link, .btn-outline-light");
+            const navbarBrand = document.querySelector(".navbar-brand"); // Seleccionamos "Your Apple"
+            const heroSection = document.querySelector("section"); // La primera sección es la hero
+
+            window.addEventListener("scroll", function () {
+                const heroHeight = heroSection.offsetHeight;
+                if (window.scrollY > heroHeight - 50) { // Cuando pasas la hero section
+                    navbar.classList.add("bg-white", "navbar-light");
+                    navbar.classList.remove("bg-transparent", "navbar-dark");
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-light");
+                        link.classList.add("text-dark", "btn-outline-dark");
+                    });
+
+                    // Cambiamos "Your Apple" a color negro
+                    navbarBrand.classList.remove("text-white");
+                    navbarBrand.classList.add("text-dark");
+
+                } else { // Cuando vuelves a la hero section
+                    navbar.classList.add("bg-transparent", "navbar-dark");
+                    navbar.classList.remove("bg-white", "navbar-light");
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-dark", "btn-outline-dark");
+                        link.classList.add("text-light");
+                    });
+
+                    // Restauramos "Your Apple" a color blanco
+                    navbarBrand.classList.remove("text-dark");
+                    navbarBrand.classList.add("text-white");
+                }
+            });
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">

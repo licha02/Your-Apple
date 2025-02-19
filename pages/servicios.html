@@ -63,7 +63,7 @@
         </section>
 
         <!-- Sección de Servicios -->
-        <section id="servicios" class="py-5 bg-light">
+        <section id="servicios" class="py-5 bg-white">
             <div class="container">
                 <h2 class="text-center fw-bold mb-4">Nuestros Servicios</h2>
                 <p class="text-center text-muted mb-5">Reparamos y optimizamos tu dispositivo con repuestos de calidad y
@@ -133,7 +133,7 @@
         </style>
 
         <!-- Sección de Video de Demostración -->
-        <section class="py-5 bg-light text-dark">
+        <section class="py-5 bg-white text-dark">
             <div class="container text-center">
                 <h2 class="fw-bold mb-2">Mira cómo realizamos una reparación</h2>
                 <p class="mb-4">Observa nuestro proceso paso a paso y descubre la calidad de nuestro trabajo.</p>
@@ -176,10 +176,49 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const navbar = document.querySelector(".navbar");
+            const navLinks = document.querySelectorAll(".nav-link, .btn-outline-light");
+            const navbarBrand = document.querySelector(".navbar-brand"); // Seleccionamos "Your Apple"
+            const heroSection = document.querySelector("section"); // La primera sección es la hero
+
+            window.addEventListener("scroll", function () {
+                const heroHeight = heroSection.offsetHeight;
+                if (window.scrollY > heroHeight - 50) { // Cuando pasas la hero section
+                    navbar.classList.add("bg-white", "navbar-light");
+                    navbar.classList.remove("bg-transparent", "navbar-dark");
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-light");
+                        link.classList.add("text-dark", "btn-outline-dark");
+                    });
+
+                    // Cambiamos "Your Apple" a color negro
+                    navbarBrand.classList.remove("text-white");
+                    navbarBrand.classList.add("text-dark");
+
+                } else { // Cuando vuelves a la hero section
+                    navbar.classList.add("bg-transparent", "navbar-dark");
+                    navbar.classList.remove("bg-white", "navbar-light");
+
+                    navLinks.forEach(link => {
+                        link.classList.remove("text-dark", "btn-outline-dark");
+                        link.classList.add("text-light");
+                    });
+
+                    // Restauramos "Your Apple" a color blanco
+                    navbarBrand.classList.remove("text-dark");
+                    navbarBrand.classList.add("text-white");
+                }
+            });
+        });
+    </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
+    </script>
 
 </body>
 
