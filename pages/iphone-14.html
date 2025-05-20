@@ -48,12 +48,12 @@
     </header>
 
     <main class="container my-5">
-        <div class="card shadow-lg p-4">
-            <div class="row g-4">
+        <div class="card shadow p-4">
+            <div class="row">
                 <!-- Carrusel de imágenes con Font Awesome -->
                 <div class="col-md-6">
                     <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner rounded">
+                        <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="/img/iphone-ej.webp" class="d-block w-100" alt="Frente del iPhone">
                             </div>
@@ -76,31 +76,48 @@
                     </div>
                 </div>
 
-                <!-- Detalles del producto y características (alineado arriba) -->
-                <div class="col-md-6 d-flex flex-column">
+                <!-- Información del producto -->
+                <div class="col-md-6">
+                    <h2>iPhone 14</h2>
+                    <p class="text-muted">Fluidez, cámara mejorada y autonomía optimizada.</p>
+
+                    <!-- Selectores de condición y almacenamiento -->
                     <div class="mb-3">
-                        <h2>iPhone 14</h2>
-                        <p class="lead text-muted">Descripción.</p>
-                        <h3 class="text-success fw-bold">$999.999</h3>
-
-                        <!-- Botón para abrir el modal -->
-                        <button class="btn btn-success btn-lg px-4 mb-4" data-bs-toggle="modal"
-                            data-bs-target="#consultaModal">
-                            <i class="fab fa-whatsapp"></i> Consultar
-                        </button>
+                        <label for="condicion" class="form-label">Condición</label>
+                        <select class="form-select" id="condicion">
+                            <option selected disabled>Seleccionar...</option>
+                            <option value="Nuevo">Nuevo</option>
+                            <option value="Usado">Usado</option>
+                        </select>
                     </div>
 
-                    <!-- Características dentro de la misma card -->
-                    <div>
-                        <h5>Características del dispositivo</h5>
-                        <ul class="ps-0 list-unstyled fs-6">
-                            <li class="mb-2">Pantalla: Super Retina XDR OLED de 6.1"</li>
-                            <li class="mb-2">Cámara: Doble cámara de 12 MP (gran angular y ultra gran angular)</li>
-                            <li class="mb-2">Procesador: Chip A15 Bionic</li>
-                            <li class="mb-2">Almacenamiento: 128 GB, 256 GB, 512 GB</li>
-                            <li class="mb-2">Color: </li>
-                        </ul>
+                    <div class="mb-3">
+                        <label for="almacenamiento" class="form-label">Almacenamiento</label>
+                        <select class="form-select" id="almacenamiento">
+                            <option selected disabled>Seleccionar...</option>
+                            <option value="128GB">128GB</option>
+                            <option value="256GB">256GB</option>
+                            <option value="512GB">512GB</option>
+                        </select>
                     </div>
+
+                    <!-- Precio y botón -->
+                    <h4 id="precio" class="text-black fw-bold mb-2">
+                        Precio: "seleccionar condiciones"
+                    </h4>
+                    <a id="btnComprar" href="#" class="btn btn-success mb-3" target="_blank">
+                        <i class="bi bi-whatsapp"></i> Consultar
+                    </a>
+
+                    <!-- Características del dispositivo -->
+                    <h6 class="fw-bold mt-4">Características del dispositivo</h6>
+                    <ul class="list-unstyled text-muted">
+                        <li>Pantalla: Super Retina XDR OLED de 6.1 pulgadas</li>
+                        <li>Cámara: Doble cámara de 12 MP (gran angular y ultra gran angular)</li>
+                        <li>Procesador: Chip A15 Bionic</li>
+                        <li>Almacenamiento: 128 GB, 256 GB, 512 GB</li>
+                        <li>Colores: Mid, Star, Purple, Blue</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -133,68 +150,47 @@
         </div>
     </footer>
 
-    <!-- Modal de consulta -->
-    <div class="modal fade" id="consultaModal" tabindex="-1" aria-labelledby="consultaModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form id="consultaForm">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="consultaModalLabel">Enviar consulta por WhatsApp</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="gbSelect" class="form-label">Capacidad</label>
-                            <select class="form-select" id="gbSelect" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="64GB">128GB</option>
-                                <option value="128GB">256GB</option>
-                                <option value="256GB">512GB</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Condición</label>
-                            <div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="estado" id="nuevo" value="Nuevo"
-                                        required>
-                                    <label class="form-check-label" for="nuevo">Nuevo</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="estado" id="usado" value="Usado">
-                                    <label class="form-check-label" for="usado">Usado</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Enviar consulta</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Script para construir y abrir el link de WhatsApp -->
     <script>
-        document.getElementById("consultaForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+        const condicionSelect = document.getElementById("condicion");
+        const almacenamientoSelect = document.getElementById("almacenamiento");
+        const precioElement = document.getElementById("precio");
+        const btnComprar = document.getElementById("btnComprar");
 
-            const gb = document.getElementById("gbSelect").value;
-            const estado = document.querySelector('input[name="estado"]:checked').value;
-            const titulo = document.querySelector('h2').innerText.trim();
+        function actualizarPrecioYEnlace() {
+            const condicion = condicionSelect.value;
+            const almacenamiento = almacenamientoSelect.value;
 
-            const mensaje = `Hola Your Apple, estoy interesado en *${titulo}*, condiciones: *${estado}* ${gb}`;
-            const url = `https://wa.me/5492216956004?text=${encodeURIComponent(mensaje)}`;
+            if (condicion && almacenamiento) {
+                let precio = "Consultar";
+                if (condicion === "Nuevo" && almacenamiento === "128GB") {
+                    precio = "$685";
+                } else if (condicion === "Usado" && almacenamiento === "128GB") {
+                    precio = "Consultar stock";
+                } else if (condicion === "Nuevo" && almacenamiento === "256GB") {
+                    precio = "Consultar stock";
+                } else if (condicion === "Usado" && almacenamiento === "256GB") {
+                    precio = "Consultar stock";
+                } else if (condicion === "Nuevo" && almacenamiento === "512GB") {
+                    precio = "$759";
+                } else if (condicion === "Usado" && almacenamiento === "512GB") {
+                    precio = "Consultar stock";
+                }
 
-            const modal = bootstrap.Modal.getInstance(document.getElementById('consultaModal'));
-            modal.hide();
+                precioElement.textContent = `Precio: ${precio}`;
 
-            setTimeout(() => {
-                window.open(url, '_blank');
-            }, 300);
-        });
+                const mensaje = `Hola! Quisiera consultar por el iPhone 14 (${condicion}, ${almacenamiento}).`;
+                const whatsappURL = `https://wa.me/5492317416196?text=${encodeURIComponent(mensaje)}`;
+                btnComprar.href = whatsappURL;
+            } else {
+                precioElement.textContent = "Precio: Seleccionar condiciones";
+                btnComprar.href = "#";
+            }
+        }
+
+        condicionSelect.addEventListener("change", actualizarPrecioYEnlace);
+        almacenamientoSelect.addEventListener("change", actualizarPrecioYEnlace);
     </script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
